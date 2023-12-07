@@ -12,7 +12,35 @@ public class Address {
     }
 
     // Implement methods to set and retrieve address information.
-
     // Additional methods or getters/setters can be added as needed.
-}
 
+    public void setStreetAddress(String StreetAddress){
+        this.streetAddress = StreetAddress;
+    }
+    public void setCity(String City){
+        this.city = City;
+    }
+    public void setState(String State){
+        this.state = State;
+    }
+    public void setZipCode(int  ZipCode){
+        this.zipCode = ZipCode;
+    }
+
+//    Getters
+    public String getStreetAddress(){
+        return streetAddress;
+    }
+    public String getCity(){
+        return city;
+    }
+    public String getState(){
+        return state;
+    }
+    public int getZipCode(){
+        return zipCode;
+    }
+
+
+
+}

@@ -12,24 +12,56 @@ public class Student extends People implements AcademicRecord {
         this.studentName = studentName;
         this.courses = new ArrayList<>();
     }
+    // getters/setters
+    public void setStudentId(int studentId) {
+        this.studentId = studentId;
+    }
+    public void setStudentName(String StudentName){
+        this.studentName = StudentName;
+    }
+
+    //     Getters
+    public int getStudentId(){
+        return studentId;
+    }
+    public String getStudentName(){
+        return studentName;
+    }
+
+    @Override
+    public String toString() {
+        String printCourses = "";
+        for(Course course:courses){
+            printCourses +=" " +course;
+        }
+        return "Student{" +
+                "studentId=" + studentId +
+                ", studentName='" + studentName + '\'' +
+                ", courses=" +printCourses +
+                '}';
+    }
 
     // Implement methods to add and retrieve course information.
+    public void setCourses(List<Course> Courses){
+        this.courses = Courses;
+    }
 
     // Design a method to calculate the student's GPA based on their course grades and credits.
-
-    // Implement the methods from the AcademicRecord interface for GPA calculation and record display.
-
     @Override
     public double calculateGPA() {
-        return 0; // update this method
+        double TotalGPA = 0;
+        for (Course course: courses) {
+            TotalGPA += course.calculateGPA();
+        }
+        return TotalGPA/courses.size();
     }
 
+    // Implement the methods from the AcademicRecord interface for GPA calculation and record display.
     @Override
     public void displayRecord() {
-        // update this method
+        toString();
     }
 
 
-    // Additional methods or getters/setters can be added as needed.
 }
 
