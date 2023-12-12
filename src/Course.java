@@ -9,17 +9,25 @@ public class Course {
         this.grade = grade;
     }
 
-    // Define getters for course name and credits.
-
     public void setCourseName(String CourseName){
         this.courseName = CourseName;
     }
-
     public void setCourseName(int Credits){
         this.credits = Credits;
     }
     public void setGrade(int grade){
         this.grade = grade;
+    }
+
+    // Define getters for course name and credits.
+    public String getCourseName(){
+        return courseName;
+    }
+    public int getCredits(){
+        return credits;
+    }
+    public int getGrade(){
+        return grade;
     }
 
 
