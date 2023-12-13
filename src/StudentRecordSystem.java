@@ -10,6 +10,7 @@ public class StudentRecordSystem {
 
         // initialize a fake list of 5 courses;
         List<Course> courseList = new ArrayList<Course>();
+        List<Course> courseToEnroll = new ArrayList<Course>();
 
         Course course1  = new Course("Math",4,4);
         Course course2  = new Course("Programming 101",5,3);
@@ -39,7 +40,7 @@ public class StudentRecordSystem {
 
             // Get address information
             // (You can reuse the Address class and create an Address object)
-            System.out.print("Enter student's address: ");
+            System.out.print("Enter student's address: \n");
 
             System.out.print("Enter student's Street: ");
             String street = scanner.nextLine();
@@ -50,16 +51,20 @@ public class StudentRecordSystem {
             System.out.print("Enter student's zip code: ");
             int zipCode = scanner.nextInt();
 
+            // init Address object
             Address address = new Address(street, city, state, zipCode);
 
             System.out.print("Enter new student's Student ID: ");
             studentIDInput = scanner.nextInt();
+            scanner.nextLine();
 
             System.out.print("Enter student's name: ");
-            String studentName = scanner.next();
+            String studentName = scanner.nextLine();
 
             // Create a new student
             activeStudent = new Student(age, gender, address, studentIDInput, studentName);
+            String printStudent = activeStudent.toString();
+            System.out.println(printStudent);
         }else {
             System.out.println("Student no found. \n");
         }
@@ -79,7 +84,9 @@ public class StudentRecordSystem {
             switch (choice.toUpperCase()) {
                 case "L":
                     // Implement list functionality
-
+                    for (Course listCourses: courseList) {
+                        System.out.println("- " +listCourses.getCourseName());         // List all the courses previously initialized.
+                    }
                     break;
                 case "E":
                     // Implement enroll functionality
@@ -87,21 +94,33 @@ public class StudentRecordSystem {
                     for (Course course : courseList) {
                         System.out.println(course.getCourseName());
                     }
+                    //init the new enroll course
                     String enrollCourse  = scanner.nextLine();
-                    Course newCourse  = null;
-                    newCourse.setCourseName(enrollCourse);
+                    Course newCourse  = new Course(enrollCourse,0,0);
 
-
-
+                    //add the bew course to the new list of courses for enroll students
+                    courseToEnroll.add(newCourse);
+                    //Add the list of courses to the current student.
+                    activeStudent.setCourses(courseToEnroll);
+                    //Display the courses
+                    activeStudent.displayRecord();
                     break;
                 case "W":
                     // Implement withdraw functionality
+                    System.out.println("Please enter the course you wish to withdraw.");
+                    String withdrawCourse = scanner.nextLine();
+                    activeStudent.DeleteCourse(withdrawCourse);            // This function search and delete the course in the list of courses from the current student.
                     break;
                 case "S":
                     // Implement search functionality
+                    System.out.println("Enter the course the you are searching");
+                    String searchCourse = scanner.nextLine();                   // this method search the course in the list of courses that are already initialize.
+                    activeStudent.searchFunction(searchCourse, courseList);     // This DO NOT search in the current student's courses. Please check the list of courses.
+
                     break;
                 case "M":
                     // Implement my classes functionality
+                    activeStudent.displayRecord();   // this will display the courses for the current student.
                     break;
                 case "X":
                     System.out.println("Exiting the application. Goodbye!");
